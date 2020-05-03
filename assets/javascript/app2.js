@@ -181,15 +181,15 @@ $(document).ready(function(){
        // })
     
 
-		function score(){
-			$("#act-btn").show();
-			$("#timer").empty();
-			$("#display-mess").empty();
-			$("#confirm").empty();
-            $("#restart").show();
-			$("#results").html(message.endgame);
-			$("#rightanswer").html("Right Answers: " + rightanswer);
-			$("#wronganswer").html("Wrong Answers: " + wronganswer);
-			$("#tooSlow").html("Nothing Answer: " + tooSlow);
-		};
+		// function score(){
+		// 	$("#act-btn").show();
+		// 	$("#timer").empty();
+		// 	$("#display-mess").empty();
+		// 	$("#confirm").empty();
+        //     $("#restart").show();
+		// 	$("#results").html(message.endgame);
+		// 	$("#rightanswer").html("Right Answers: " + rightanswer);
+		// 	$("#wronganswer").html("Wrong Answers: " + wronganswer);
+		// 	$("#tooSlow").html("Nothing Answer: " + tooSlow);
+		// };
 });
