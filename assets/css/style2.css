@@ -1,0 +1,50 @@
+body {
+    background-image: url(https://www.vitalthrills.com/wp-content/uploads/2019/10/backtothefuturetrilogy.jpg); 
+    background-size: 100%;
+    text-align: center;
+    font-family: 'Baloo Paaji 2', cursive;
+    letter-spacing: 2px; 
+    color: black;
+}
+
+nav {
+    height: 100px;
+}
+
+.welcome {
+    background-color: black;
+    background-position: center;
+    height: 400px;
+    font-family: 'Baloo Paaji 2', cursive;
+    margin-bottom: 1in;
+    border: 100px;
+    text-align: center;
+    content: unset;
+    color: yellow;
+    width: 45%;
+    margin: auto;
+}
+
+.container {
+    background-color: black;
+    background-position: center;
+    height: 400px;
+    font-family: 'Baloo Paaji 2', cursive;
+    margin-bottom: 1in;
+    border: 100px;
+    text-align: center;
+    content: unset;
+    color: yellow;
+    width: 45%;
+    margin: auto;
+    padding: 50px;
+}
+
+button {
+    background-color: red;
+    color: black;
+}
+
+
+
+<!-- background-image: url(https://image.freepik.com/free-vector/speed-light-red-blue-background_1078-550.jpg);
