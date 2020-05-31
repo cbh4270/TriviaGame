@@ -1,94 +1,74 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>BTTF Trivia</title>
-
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css"> 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@600&display=swap" rel="stylesheet">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  
-  
- <!--<audio controls> <source src="assets/images/TermTheme.mp3" type="audio/mp3">  </audio>  -->
-
- 
+    <meta charset="UTF-8">
+    <title>COMBO Trivia</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@600&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="assets/css/style.css" rel="stylesheet">
+    
 </head>
 
-<body>
-  <nav>""</nav>
-  <div class ="welcome">
-    <br>
-    <br>
-    <br>
-  
-    <h1>Back to the Future Trivia!</h1>
-    <h3>You have 10 seconds to answer each of 10 questions.</h3>
-    <h3>Do you know the Future?</h3>
-    <h3>And the past?</h3>
-    <br>
-    
-    <button id= "act-btn">ACTIVATE FLUX CAPACITOR</button>
-  
-  </div>
 
-    
   
-  
-  <div class="container col-8">
-       
-
-    
-         
+<header>
+    <img src='assets/images/bttf header.png' alt='headerImg' width='100%' height='370px'>
         
-      <div id="timer"></div>    
-      <br>
-      <div id="ques-count"></div>   
-      <br>
+</header>
+
+<body>
+
+<div class= 'bkground'>
+
+
+    <div class='container' id='divide'>
+        <button id='startBtn'>ACTIVATE FLUX CAPACITOR</button>
+
+
+        <div id= timer></div>
+        
+        
+        <div id= quesNumb></div>
+        <div class='question'></div>
+        <div class='solutions'></div>
+        
+
+
+
+        
+        <div id=message></div>
+        <div id=showAnswer></div>
+        
+        
+        <div id=finalMessage></div>
+        <div id=correctAnswers></div>
+        <div id=incorrectAnswers></div>
+        <div id=unanswered></div>
+        <button id='startOverBtn'></button>
     
-      <div class="question"></div>
-      <div class="answer"></div>
-  
-   
-  
-      <div id="results"></div>
-      <div id="right-answer"></div>
-      <div id="wrong-answer"></div>
-      <div id="nothinganswer"></div>
+    </div>
 
-      <!--<button id="restart">GO BACK IN TIME</button>-->
-  
+</div>
+    
+    
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+</body>
 
-      <div id="display-mess"></div>
-      <div id="confirm"></div>
+</html>  
     
     
     
-    </div> 
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-    <!-------------JAVASCRIPT  ----------------->
-  
-  
-
-  <script type="text/javascript" src="assets/javascript/app.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  
-  
-  
-  </body>
-  
-
-</html>

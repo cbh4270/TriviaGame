@@ -1,195 +1,189 @@
-$(document).ready(function(){
 
-	    var quesNumb = 0 ;
-		var rightanswer = 0;
-		var wronganswer = 0;
-		var tooSlow = 0;
-		var seconds;
-		var time;
-		var answers;
-		var optionselect;
+var quesNumb; 
+var correctAnswer; 
+var incorrectAnswer; 
+var unanswered; 
+var seconds; 
+var time; 
+var answered; 
+var userSelect;
 
-
-	var questions = [{ 
-			question: "How fast does the time machine?",
-			options: ["88 mph", "100 mph", "75 mph"],
-			answer: 0,
-		}, {
-			question: "How did Biff become rich?",
-			options: ["Male modeling", "The lottery", "Gambling"],
-			answer: 2,
-		
-        }, {
-			question: "What model car is the time machine?",
-			options: ["Lambo", "Delorean", "Focus"],
-			answer: 1,
-		
-        }, {
-			question: "How many Gigawatts are needed for time travel?",
-			options: ["1.21", "47", "6200"],
-			answer: 0,
-		
-        }, {
-			question: "In 1955, what does Ms McFly assume Marty's name is?",
-			options: ["Calvin", "Phil", "Tommy"],
-			answer: 0,
-		
-        }, {
-			question: "What is Biff's ancestor's nickname in the Old West?",
-			options: ["Wild One", "Drunk Tannen", "Mad Dog"],
-			answer: 2,
-		
-        }, {
-			question: "What is Mr Fusion used for on the time machine?",
-			options: ["Speed", "Power supply", "Fuel"],
-			answer: 1,
-		
-        }, {
-			question: "What does Marty's great-great-grandfather do to him in the Old West?",
-			options: ["Buys him beer", "Pees on him", "Shots him"],
-			answer: 1,
-		
-        }, {
-			question: "How did George McFly become successful in the end?",
-			options: ["Male modeling", "Boxer", "Writer"],
-			answer: 2,
-		
-        }, {
-			question: "What is Micheal J Fox's middle name?",
-			options: ["Andrew", "Joseph", "James"],
-			answer: 2,
-		
-        }];
-        
+var messages = {
+	correct: "Right!",
+	incorrect: "Too bad you can't go back in time. Wrong Answer",
+	endTime: "Out of TIME!",
+	finished: "That was HEAVY. How do you think you did?"
+}
 
 
 
+var theQuestions = [{ 
+	question: "How fast does the time machine?",
+	solutions: ["88 mph", "100 mph", "75 mph"],
+	answer: 0,
+}, {
+	question: "How did Biff become rich?",
+	solutions: ["Male modeling", "The lottery", "Gambling"],
+	answer: 2,
 
-    $(".container").hide()
+}, {
+	question: "What model car is the time machine?",
+	solutions: ["Lambo", "Delorean", "Focus"],
+	answer: 1,
 
-    $("#act-btn").on("click", function () {
+}, {
+	question: "How many Gigawatts are needed for time travel?",
+	solutions: ["1.21", "47", "6200"],
+	answer: 0,
 
-        nextQues();
-        $("#act-btn").hide();
-        $(".welcome").hide();
-        $(".container").show();
-    });
+}, {
+	question: "In 1955, what does Ms McFly assume Marty's name is?",
+	solutions: ["Calvin", "Phil", "Tommy"],
+	answer: 0,
 
-		
+}, {
+	question: "What is Biff's ancestor's nickname in the Old West?",
+	solutions: ["Wild One", "Drunk Tannen", "Mad Dog"],
+	answer: 2,
 
-		function nextQues(){
-			
-           // $("#restart").hide();
-            shotClock();
-        
-            $("#ques-count").html("Question " + (quesNumb+1) + "  of " + questions.length); // adds question 1 of 10
-			$(".question").html("<h2>" + questions[quesNumb].question + "</h2>"); // displays question
+}, {
+	question: "What is Mr Fusion used for on the time machine?",
+	solutions: ["Speed", "Power supply", "Fuel"],
+	answer: 1,
 
-			for(var i = 0; i < 3; i++){
-				var select = $("<div>");
-				select.text(questions[quesNumb].options[i]);
-				select.attr({"data-index" : i});  // decides correct answer
-				select.addClass("selection");      //allows selection
-				$(".answer").append(select);    // showing answer
-			}
+}, {
+	question: "What does Marty's great-great-grandfather do to him in the Old West?",
+	solutions: ["Buys him beer", "Pees on him", "Shots him"],
+	answer: 1,
 
-			
+}, {
+	question: "How did George McFly become successful in the end?",
+	solutions: ["Male modeling", "Boxer", "Writer"],
+	answer: 2,
 
-			$(".selection").on("click", function(){
-				optionselect = $(this).data("index");
-				clearInterval(time);                  //resets timer
-				showAnswer();
-            })
-        
+}, {
+	question: "What is Michael J Fox's middle name?",
+	solutions: ["Andrew", "Joseph", "James"],
+	answer: 0,
 
-		};
+}];
 
-        //
+$('#startOverBtn').hide();
 
-		
 
-		var message = {
-			right: "Correct!",
-			wrong: "Wrong!",
-		    slow: "You took too much TIME!",
-			endgame: "TIME'S UP!"
-		}
-
-		function showAnswer(){
-			$("#ques-count").empty();
-			$(".selection").empty();
-            $(".question").empty();
-            $("#display-mess").empty();
-
-			var correctAns = questions[quesNumb].options[questions[quesNumb].answer];
-			var match = questions[quesNumb].answer;
-
-			if ((optionselect == match) && (answers == true)){
-				rightanswer++;
-				$("#display-mess").text(message.right);
-			} else if ((optionselect !== match) && (answers == true)){
-				wronganswer++;
-				$("#display-mess").text(message.wrong);
-				$("#confirm").html("The correct answer was: " + correctAns-1);
-			} else {
-				tooSlow++;
-				$("#display-mess").text(message.slow);
-				$("#confirm").html("The correct answer was: " + correctAns-1);
-			}
-
-			if (quesNumb === (questions.length-1)){    // next question displays after guess/timeout
-				setTimeout(score, 2000)
-			} else {
-				quesNumb++;
-                setTimeout(nextQues, 2000);
-                
-			}
-        };
-
-        function count(){
-            seconds--;
-            
-			$("#timer").html("<h2>TIME:" + seconds-- + "</h2>");
-			if(seconds < 1){
-				clearInterval(time);
-				answers = false;
-				
-			}
-		};
-
-        
-
-        function shotClock(){
-			seconds = 10;
-			$("#timer").html("<h2>Time Remaining:" + seconds + "</h2>");
-			answers = true;
-			time = setInterval(count, 1000);
-		};
-        
-        
-        
-        
-        //$("#restart").on("click", function () {
-       //     $(".container").hide();
-       //     $(".welcome").show();
-       //     quesNumb = 0
-      //      rightanswer = 0;
-       //     wronganswer = 0;
-        //    tooSlow = 0;
-       //     answers=0;
-    
-       // })
-    
-
-		// function score(){
-		// 	$("#act-btn").show();
-		// 	$("#timer").empty();
-		// 	$("#display-mess").empty();
-		// 	$("#confirm").empty();
-        //     $("#restart").show();
-		// 	$("#results").html(message.endgame);
-		// 	$("#rightanswer").html("Right Answers: " + rightanswer);
-		// 	$("#wronganswer").html("Wrong Answers: " + wronganswer);
-		// 	$("#tooSlow").html("Nothing Answer: " + tooSlow);
-		// };
+$('#startBtn').click(function(){
+	$(this).hide();  						 
+	newGame();								
 });
+
+$('#startOverBtn').click(function(){
+	$(this).hide();							
+	newGame();
+});
+
+function newGame(){						
+	$('#finalMess').empty();
+	$('#correctAnswers').empty();        
+	$('#incorrectAnswers').empty();
+	$('#unanswered').empty();
+	quesNumb = 0;
+	correctAnswer = 0;						
+	incorrectAnswer = 0;
+	unanswered = 0;
+	newQuestion();
+}
+
+function newQuestion(){
+	$('#message').empty();                  
+	$('#showAnswer').empty();
+	
+	answered = true;						
+	
+	//sets up new questions & solutions
+	$('#quesNumb').html('Question '+(quesNumb+1)+'/'+theQuestions.length);  
+	$('.question').html('<h2>' + theQuestions[quesNumb].question + '</h2>');
+	for(var i = 0; i < 4; i++){
+		var choices = $('<div>');
+		choices.text(theQuestions[quesNumb].solutions[i]);
+		choices.attr({'data-index': i });
+		choices.addClass('thisChoice');
+		$('.solutions').append(choices);
+	}
+	countdown();
+
+	
+	$('.thisChoice').on('click',function(){
+		userSelect = $(this).data('index');
+		clearInterval(time);
+		answerPage();
+	});
+} 
+
+
+
+
+function countdown(){
+	seconds = 10;
+	$('#timer').html('<h3>Time Remaining: ' + seconds + '</h3>');
+	answered = true;
+	//sets timer to go down
+	time = setInterval(showCountdown, 1000);
+}
+
+function showCountdown(){
+	seconds--;
+	$('#timer').html('<h3>Time Remaining: ' + seconds + '</h3>');
+	if(seconds < 1){
+		clearInterval(time);
+		answered = false;
+		answerPage();
+	}
+}
+
+function answerPage(){
+	$('#quesNumb').empty();
+	$('.thisChoice').empty(); 
+	$('.question').empty();
+
+	var rightAnswerText = theQuestions[quesNumb].solutions[theQuestions[quesNumb].answer];
+	var rightAnswerIndex = theQuestions[quesNumb].answer;
+	
+	
+	
+	
+	if((userSelect == rightAnswerIndex) && (answered == true)){
+		correctAnswer++;
+		$('#message').html(messages.correct);
+	} else if((userSelect != rightAnswerIndex) && (answered == true)){
+		incorrectAnswer++;
+		$('#message').html(messages.incorrect);
+		$('#showAnswer').html('The correct answer is: ' + rightAnswerText);
+	} else{
+		unanswered++;
+		$('#message').html(messages.endTime);
+		$('#showAnswer').html('The correct answer is: ' + rightAnswerText);
+		answered = true;
+	}
+	
+	if(quesNumb == (theQuestions.length-1)){
+		setTimeout(scoreboard, 1000)
+	} else{
+		quesNumb++;
+		setTimeout(newQuestion, 3500);
+	}	
+}
+
+function scoreboard(){
+	$('#timer').empty();
+	$('#message').empty();
+	$('#showAnswer').empty();
+	$('#gif').empty();
+
+	$('#finalMess').html(messages.finished);
+	$('#correctAnswers').html("Correct Answers: " + correctAnswer);
+	$('#incorrectAnswers').html("Incorrect Answers: " + incorrectAnswer);
+	$('#unanswered').html("Unanswered: " + unanswered);
+	$('#startOverBtn').addClass('startOverBtn');
+	$('#startOverBtn').show();
+	$('#startOverBtn').html('Go back in TIME?');
+}
